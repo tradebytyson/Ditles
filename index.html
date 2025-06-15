@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from TYSON_OWNER.netlify.app/ by TG :- @TYSON_OWNER Copier/3.x [XR&CO'2017], Sun, 15 Jun 2025 08:11:24 GMT -->
+<!-- Added by TYSON_OWNER --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by TYSON_OWNER -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYSON_OWNER - Hacking & Security</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #000;
+            color: #0f0;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+        }
+        
+        #loading-logo {
+            width: 200px;
+            height: 200px;
+            animation: pulse 2s infinite;
+        }
+        
+        #loading-text {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #0f0;
+            padding: 0 20px;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Door Opening Effect */
+        .door {
+            position: fixed;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #000;
+            z-index: 999;
+            transition: all 1.5s ease;
+        }
+        
+        #left-door { left: 0; }
+        #right-door { right: 0; }
+        
+        /* Main Content */
+        #content {
+            display: none;
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #0f0;
+            margin-bottom: 20px;
+        }
+        
+        .logo { 
+            width: 120px;
+            margin-bottom: 15px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        nav ul li { 
+            margin: 0 10px 10px 10px;
+        }
+        
+        nav ul li a {
+            color: #0f0;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover { text-shadow: 0 0 5px #0f0; }
+        
+        .mission-statement {
+            background-color: #111;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 3px solid #0f0;
+            font-size: 0.95rem;
+        }
+        
+        .links-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        @media (min-width: 600px) {
+            .links-section {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        .link-card {
+            background-color: #111;
+            padding: 15px;
+            border: 1px solid #0f0;
+            transition: all 0.3s;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .link-card h3 { 
+            margin-bottom: 10px; 
+            color: #0f0;
+            font-size: 1.1rem;
+        }
+        
+        .link-card p {
+            font-size: 0.9rem;
+        }
+        
+        .link-card a {
+            color: #0f0;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 8px;
+            border: 1px solid #0f0;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .link-card a:hover { 
+            background-color: #0f0; 
+            color: #000; 
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #0f0;
+            margin-top: 30px;
+            font-size: 0.8rem;
+        }
+        
+        .matrix-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        /* Terminal Effect */
+        .terminal {
+            background-color: #111;
+            border: 1px solid #0f0;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            font-size: 0.85rem;
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .terminal-btn {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .btn-red { background-color: #ff5f56; }
+        .btn-yellow { background-color: #ffbd2e; }
+        .btn-green { background-color: #27c93f; }
+        
+        .terminal-title {
+            margin-left: 8px;
+            color: #0f0;
+            font-size: 0.8rem;
+        }
+        
+        .terminal-body {
+            line-height: 1.5;
+        }
+        
+        .command {
+            color: #0f0;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: #0f0;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Contact Section */
+        #contact {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #111;
+            border: 1px solid #0f0;
+        }
+        
+        #contact h2 {
+            margin-bottom: 10px;
+            color: #0f0;
+            font-size: 1.2rem;
+        }
+        
+        #contact a {
+            color: #0f0;
+            text-decoration: none;
+            border-bottom: 1px dashed #0f0;
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0f0;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 500px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            #loading-logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background Effect -->
+    <canvas id="matrix-effect" class="matrix-effect"></canvas>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="../iili.io/F3DMiMP.png" alt="TYSON_OWNER Logo" id="loading-logo">
+        <div id="loading-text">CLICK TO ENTER</div>
+    </div>
+    
+    <!-- Door Opening Effect -->
+    <div class="door" id="left-door"></div>
+    <div class="door" id="right-door"></div>
+    
+    <!-- Main Content -->
+    <div id="content">
+        <header>
+            <img src="../iili.io/F3DMiMP.png" alt="TYSON_OWNER Logo" class="logo">
+            <button class="menu-toggle">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="mission-statement">
+            <h2>MISSION STATEMENT</h2>
+            <p>Providing cutting-edge security solutions and penetration testing tools for ethical hacking purposes. We believe in security through knowledge and transparency.</p>
+        </section>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="terminal-btn btn-red"></span>
+                <span class="terminal-btn btn-yellow"></span>
+                <span class="terminal-btn btn-green"></span>
+                <span class="terminal-title">root@TYSON_OWNER:~</span>
+            </div>
+            <div class="terminal-body" id="terminal-text">
+                <p><span class="command">$ _</span><span class="cursor"></span></p>
+            </div>
+        </div>
+        
+        <section class="links-section" id="tools">
+            <div class="link-card">
+                <h3>COLOR TRADING TELEGRAM GROUP</h3>
+                <p>Join our exclusive community of security researchers and ethical hackers.</p>
+                <a href="../external.html?link=https://t.me/TYSON_OK_WIN_HACK" target="_blank">JOIN NOW</a>
+            </div>
+            
+            <div class="link-card">
+                <h3>TELEGRAM CHANNEL</h3>
+                <p>Get the latest updates, tools, and security research findings.</p>
+                <a href="../external.html?link=https://t.me/+F6YlLUwilLFjMTVl" target="_blank">FOLLOW CHANNEL</a>
+            </div>
+            
+            <div class="link-card">
+                <h3>TELEGRAM BOT</h3>
+                <p>Automated tool for security checks and information gathering.</p>
+                <a href="../external.html?link=https://t.me/TYSON_VIP_TOOL_BOT" target="_blank">ACCESS BOT</a>
+            </div>
+            
+            <div class="link-card">
+                <h3>FF RAT GALLERY HACK</h3>
+                <p>Advanced penetration testing tool for security research.</p>
+                <a href="../external.html?link=https://t.me/+Zk9VdtFFHX84YTNl" target="_blank">VIEW DETAILS</a>
+            </div>
+                        <div class="link-card">
+                <h3>DDOS attack tool</h3>
+                <p>Advanced penetration testing tool for security research.</p>
+                <a href="../external.html?link=https://t.me/+Zk9VdtFFHX84YTNl" target="_blank">VIEW DETAILS</a>
+            </div>
+            <div class="link-card">
+                <h3>FULL ANDROID HACK RAT</h3>
+                <p>Comprehensive security testing tool for Android platforms.</p>
+                <a href="../external.html?link=https://t.me/+Zk9VdtFFHX84YTNl" target="_blank">VIEW DETAILS</a>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>CONTACT ME</h2>
+            <p>Telegram: <a href="../external.html?link=https://t.me/TYSON_OWNER" target="_blank">@TYSON_OWNER</a></p>
+        </section>
+        
+        <footer>
+            <p>© 2025 TYSON_OWNER. All tools are for educational and ethical security testing purposes only.</p>
+        </footer>
+    </div>
+    
+    <audio id="bg-audio" loop>
+        <source src="1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        // Matrix Effect
+        const canvas = document.getElementById('matrix-effect');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        
+        const katakana = 'TYSON_OWNERTYSON_OWNERTYSON_OWNER';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        
+        const alphabet = katakana + latin + nums;
+        
+        const fontSize = Math.max(12, Math.min(16, window.innerWidth / 30));
+        const columns = Math.floor(canvas.width / fontSize);
+        
+        const rainDrops = Array(columns).fill(1);
+        
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        
+        const matrixInterval = setInterval(draw, 30);
+        
+        // Loading Screen Interaction
+        const loadingScreen = document.getElementById('loading-screen');
+        const leftDoor = document.getElementById('left-door');
+        const rightDoor = document.getElementById('right-door');
+        const content = document.getElementById('content');
+        const bgAudio = document.getElementById('bg-audio');
+        const terminalText = document.getElementById('terminal-text');
+        
+        loadingScreen.addEventListener('click', () => {
+            // Play audio
+            bgAudio.play().catch(e => console.log("Audio play failed:", e));
+            
+            // Animate doors opening
+            leftDoor.style.transform = 'translateX(-100%)';
+            rightDoor.style.transform = 'translateX(100%)';
+            
+            // Hide loading screen after animation
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                content.style.display = 'block';
+                
+                // Typewriter effect for terminal
+                const commands = [
+                    "$ whoami",
+                    "TYSON_OWNER - Security Researcher & Penetration Tester",
+                    "%24%20ls%20-la/tools/index.html",
+                    "FF Rat Gallery Hack\nFull Android Hack Rat\nCustom Exploits\nSecurity Research",
+                    "$ _"
+                ];
+                
+                let i = 0;
+                let j = 0;
+                let currentCommand = '';
+                let isTyping = true;
+                
+                terminalText.innerHTML = '';
+                
+                function typeWriter() {
+                    if (i < commands.length) {
+                        if (isTyping) {
+                            if (j < commands[i].length) {
+                                currentCommand += commands[i].charAt(j);
+                                terminalText.innerHTML = currentCommand + '<span class="cursor"></span>';
+                                j++;
+                                setTimeout(typeWriter, Math.random() * 100 + 50);
+                            } else {
+                                isTyping = false;
+                                currentCommand += '<br><br>';
+                                j = 0;
+                                i++;
+                                setTimeout(typeWriter, 1000);
+                            }
+                        } else {
+                            isTyping = true;
+                            setTimeout(typeWriter, 500);
+                        }
+                    }
+                }
+                
+                typeWriter();
+            }, 1500);
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('nav ul');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('show');
+            });
+        });
+        
+        // Resize canvas when window is resized
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            clearInterval(matrixInterval);
+            setInterval(draw, 30);
+        });
+    </script>
+</body>
+
+<!-- Mirrored from TYSON_OWNER.netlify.app/ by TG :- @TYSON_OWNER Copier/3.x [XR&CO'2017], Sun, 15 Jun 2025 08:11:26 GMT -->
+</html>
